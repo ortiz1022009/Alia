@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Registro exitoso | Alia</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <style>
+    body {
+      background: linear-gradient(120deg, #211d2b 0%, #2a213d 100%);
+      color: #fff;
+      font-family: 'Poppins', 'Segoe UI', Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+    .success-box {
+      background: rgba(42,33,61,0.97);
+      border-radius: 22px;
+      box-shadow: 0 8px 40px 0 rgba(45,36,75,0.22);
+      padding: 38px 32px 36px 32px;
+      max-width: 440px;
+      width: 94vw;
+      text-align: center;
+      margin-top: 30px;
+      animation: fadeIn 0.7s cubic-bezier(.42,0,.58,1);
+      backdrop-filter: blur(2px);
+    }
+    .success-box h1 {
+      color: #72eaff;
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      text-shadow: 0 2px 12px #0003;
+    }
+    .success-box p {
+      font-size: 1.14rem;
+      color: #e1d8fa;
+      margin: 15px 0 0 0;
+      text-shadow: 0 1px 6px #0002;
+    }
+    .btn {
+      display: inline-block;
+      background: linear-gradient(90deg,#7e6fff 35%,#72eaff 100%);
+      color: #fff;
+      border: none;
+      border-radius: 13px;
+      padding: 13px 38px;
+      font-size: 1.13rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 2px 18px 0 #6e4ccf38;
+      outline: none;
+      margin: 24px 0 0 0;
+      transition: background 0.22s,transform 0.12s;
+      letter-spacing: 0.5px;
+    }
+    .btn:active { transform: scale(0.97);}
+    .btn:hover { background: linear-gradient(90deg,#72eaff 20%,#7e6fff 100%);}
+    @keyframes fadeIn {
+      from {opacity:0;transform:scale(0.98);}
+      to {opacity:1;transform:none;}
+    }
+    .icon-check {
+      color: #7eecb8;
+      font-size: 2.6rem;
+      margin-bottom: 10px;
+      margin-top: 3px;
+      filter: drop-shadow(0 2px 10px #72eaff33);
+    }
+    @media (max-width: 500px) {
+      .success-box { padding: 18px 2vw 16px 2vw; }
+      .success-box h1 { font-size:1.3rem;}
+      .btn { font-size:1rem; padding:11px 22px;}
+    }
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
+</head>
+<body>
+  <div class="success-box">
+    <div class="icon-check"><i class="fa fa-check-circle"></i></div>
+    <h1>¡Registro exitoso!</h1>
+    <p>
+      Tu cuenta ha sido creada y verificada correctamente.<br>
+      Ahora puedes iniciar sesión con tu correo y contraseña.
+    </p>
+    <a href="{{ url_for('login') }}" class="btn" style="margin-top:22px;">Iniciar sesión</a>
+  </div>
+</body>
+</html>

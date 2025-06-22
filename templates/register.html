@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Registrarse | Alia</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      min-width: 100vw;
+      width: 100vw;
+      box-sizing: border-box;
+      overflow-x: hidden;
+    }
+    body.dark-theme {
+      background: linear-gradient(120deg, #211d2b 0%, #2a213d 100%);
+      font-family: 'Poppins', 'Segoe UI', Arial, sans-serif;
+      color: #f5f5f7;
+      min-height: 100dvh;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .purple-theme {
+      --primary-color: #7c4dff;
+      --primary-light: #b388ff;
+      --input-bg: #232040;
+      --input-border: #332772;
+      --input-focus: #b388ff;
+      --box-bg: #241d3b;
+      --box-shadow: 0 8px 36px 0 rgba(45,36,75,0.38);
+      --text-color: #f5f5f7;
+      --error: #ff5370;
+      --alert-bg: #2d1f3a;
+    }
+    .auth-container {
+      width: 100vw;
+      min-height: 100dvh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: env(safe-area-inset-top, 0) 0 env(safe-area-inset-bottom, 0) 0;
+      background: none;
+      box-sizing: border-box;
+    }
+    .auth-box {
+      background: var(--box-bg);
+      border-radius: 22px;
+      box-shadow: var(--box-shadow);
+      padding: 34px 20px 22px 20px;
+      width: 100%;
+      max-width: 355px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      align-items: center;
+      animation: fadeIn 0.7s cubic-bezier(.42,0,.58,1);
+      margin: 0 18px;
+      box-sizing: border-box;
+    }
+    .logo-alia {
+      margin-bottom: 10px;
+      animation: fadeIn 1s cubic-bezier(.42,0,.58,1);
+      width: 54px;
+      height: 54px;
+    }
+    .logo-redondo {
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2.5px solid #b388ff44;
+      box-shadow: 0 1px 10px #b388ff40;
+      background: #231d38;
+      display: block;
+      margin: 0 auto 10px auto;
+    }
+    h2 {
+      color: var(--primary-light);
+      font-weight: 600;
+      margin: 8px 0 12px 0;
+      letter-spacing: 0.03em;
+      text-shadow: 0 2px 6px #33277233;
+      font-size: 1.45rem;
+      text-align: center;
+    }
+    .requirements {
+      background: #2d1f3a;
+      color: #ffe082;
+      font-size: 0.99rem;
+      border-radius: 10px;
+      padding: 10px 14px 10px 16px;
+      margin-bottom: 10px;
+      width: 100%;
+      box-sizing: border-box;
+      text-align: left;
+      display: none;
+      transition: all .24s;
+    }
+    .requirements.active {
+      display: block;
+      animation: fadeIn .3s cubic-bezier(.42,0,.58,1);
+    }
+    .requirements ul {
+      margin: 5px 0 0 0;
+      padding-left: 19px;
+    }
+    .show-req-link {
+      color: #b388ff;
+      font-size: 1.01rem;
+      text-decoration: underline;
+      cursor: pointer;
+      margin-bottom: 2px;
+      margin-top: 2px;
+      font-weight: 500;
+      transition: color .14s;
+      text-align: left;
+      width: 100%;
+      display: inline-block;
+    }
+    .show-req-link:hover { color: #ffe082; }
+    .input-group {
+      width: 100%;
+      position: relative;
+      margin-bottom: 10px;
+    }
+    input[type="text"], input[type="password"], input[type="email"] {
+      width: 100%;
+      padding: 13px 46px 13px 14px;
+      border-radius: 12px;
+      background: var(--input-bg);
+      border: 1.5px solid var(--input-border);
+      color: var(--text-color);
+      font-size: 1.04rem;
+      outline: none;
+      transition: border 0.23s;
+      margin-bottom: 2px;
+      box-sizing: border-box;
+    }
+    input[type="text"]:focus, input[type="password"]:focus, input[type="email"]:focus {
+      border-color: var(--input-focus);
+      background: #261f3f;
+    }
+    input[type="text"]::placeholder, input[type="password"]::placeholder, input[type="email"]::placeholder {
+      color: #bdbdf1c8;
+      opacity: 1;
+    }
+    .fa-eye, .fa-eye-slash {
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #b388ffad;
+      cursor: pointer;
+      font-size: 1.2em;
+      transition: color 0.2s;
+    }
+    .fa-eye:hover, .fa-eye-slash:hover { color: #fff; }
+    .btn-primary {
+      width: 100%;
+      padding: 13px 0;
+      background: linear-gradient(90deg, var(--primary-color) 35%, var(--primary-light) 100%);
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      box-shadow: 0 2px 18px 0 #6e4ccf38;
+      transition: background 0.23s, transform 0.18s;
+      cursor: pointer;
+      margin-top: 8px;
+    }
+    .btn-primary:active { transform: scale(0.98);}
+    .btn-primary:hover { background: linear-gradient(90deg, var(--primary-light) 55%, var(--primary-color) 100%); transform: scale(1.03);}
+    .form-error {
+      color: var(--error);
+      background: #2d1f3a;
+      border-radius: 8px;
+      padding: 9px 11px;
+      margin-top: 7px;
+      font-size: 1.01rem;
+      text-align: center;
+      animation: shake 0.28s cubic-bezier(.36,.07,.19,.97) both;
+    }
+    @keyframes shake {
+      10%, 90% { transform: translateX(-1px);}
+      20%, 80% { transform: translateX(2px);}
+      30%, 50%, 70% { transform: translateX(-4px);}
+      40%, 60% { transform: translateX(4px);}
+    }
+    .form-foot {
+      margin-top: 22px;
+      color: #bdbdf1c8;
+      font-size: 0.99rem;
+      text-align: center;
+    }
+    .form-foot a {
+      color: var(--primary-light);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .form-foot a:hover { color: #fff; }
+    .alert-warning {
+      background: #f9e8af11;
+      color: #ffe082;
+      padding: 10px 13px;
+      border-radius: 8px;
+      font-size: 0.99rem;
+      border: 1px solid #ffe08233;
+      margin-bottom: 8px;
+      text-align: center;
+    }
+    .sugerencia-opcion {
+      background:#322a54;
+      padding:4px 12px;
+      border-radius:9px;
+      margin:2px 3px;
+      cursor:pointer;
+      display:inline-block;
+      color:#b388ff;
+      transition:background 0.15s, color 0.15s;
+    }
+    .sugerencia-opcion:hover {
+      background:#b388ff;
+      color:#241d3b;
+    }
+    .fade-in { animation: fadeIn 0.8s cubic-bezier(.42,0,.58,1) both; }
+    .fade-out { animation: fadeOut 0.5s cubic-bezier(.42,0,.58,1) both; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(24px) scale(0.98);}
+      to   { opacity: 1; transform: none;}
+    }
+    @keyframes fadeOut {
+      from { opacity: 1; }
+      to   { opacity: 0; transform: scale(1.02);}
+    }
+    .slide-up { animation: slideUp .7s cubic-bezier(.42,0,.58,1) both;}
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(48px);}
+      to   { opacity: 1; transform: none;}
+    }
+    ::-webkit-scrollbar { width: 7px; background: #2d1f3a;}
+    ::-webkit-scrollbar-thumb { background: #402a76; border-radius: 8px;}
+    @media (max-width: 500px) {
+      .auth-box { min-width: unset; max-width: 97vw; width: 97vw; padding: 20px 2vw 20px 2vw;}
+      .logo-alia, .logo-redondo { width:40px !important; height:40px !important;}
+    }
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
+</head>
+<body class="dark-theme purple-theme">
+  <div class="auth-container fade-in">
+    <div class="auth-box slide-up">
+      <div class="logo-alia">
+        <img src="{{ url_for('static', filename='logo.png') }}" alt="Alia Logo" class="logo-redondo">
+      </div>
+      <h2>Crear cuenta</h2>
+      <span class="show-req-link" id="showReqs">Ver requisitos de inicio de sesión</span>
+      <div class="requirements" id="reqsList">
+        <b>La contraseña debe contener:</b>
+        <ul>
+          <li>Al menos 8 caracteres</li>
+          <li>Al menos una letra mayúscula</li>
+          <li>Al menos una letra minúscula</li>
+          <li>Al menos un número</li>
+          <li>Al menos un símbolo (ej: !@#$%^&amp;*()_+[]{}:;&lt;&gt;,.?)</li>
+        </ul>
+      </div>
+      <form method="POST" id="registerForm" autocomplete="on">
+        <div class="input-group">
+          <input type="text" name="usuario" id="usuario" placeholder="Usuario" required autocomplete="username">
+          <div id="sugerencias-usuario" style="display:none; margin-top:6px;"></div>
+        </div>
+        <div class="input-group">
+          <input type="email" name="email" placeholder="Correo electrónico" required autocomplete="email">
+        </div>
+        <div class="input-group">
+          <input type="password" name="contraseña" id="contraseña" placeholder="Contraseña" required autocomplete="new-password">
+          <i id="togglePassword" class="fa fa-eye-slash"></i>
+        </div>
+        <div class="input-group">
+          <input type="password" name="contraseña2" id="contraseña2" placeholder="Repetir contraseña" required autocomplete="new-password">
+          <i id="togglePassword2" class="fa fa-eye-slash"></i>
+        </div>
+        <button type="submit" class="btn-primary" style="margin-top:6px;">Enviar código</button>
+        <div class="form-error" id="passError" style="display:none;"></div>
+        {% if error %}
+        <div class="form-error">{{ error }}</div>
+        {% endif %}
+        {% if sugerencias %}
+        <div class="alert-warning">
+          Usuario no disponible. Elige uno:<br>
+          {% for sugerencia in sugerencias %}
+            <span class="sugerencia-opcion">{{ sugerencia }}</span>
+          {% endfor %}
+        </div>
+        {% endif %}
+        {% if usuario_intentado %}
+        <input type="hidden" id="usuario_intentado" value="{{ usuario_intentado }}">
+        {% endif %}
+      </form>
+      <!-- INICIO: Soporte técnico -->
+      <div style="margin-top:14px; text-align:center;">
+        <a href="soporte.html" target="_blank" style="color:#b388ff;text-decoration:underline;font-weight:500;font-size:1.02rem;">
+          ¿Necesitas ayuda? Soporte técnico
+        </a>
+      </div>
+      <!-- FIN: Soporte técnico -->
+      <div class="form-foot">
+        ¿Ya tienes cuenta?
+        <a href="#" id="goToLogin">Inicia sesión</a>
+      </div>
+    </div>
+  </div>
+  <script>
+    document.getElementById("goToLogin").onclick = function(e){
+      e.preventDefault();
+      document.querySelector(".auth-container").classList.add("fade-out");
+      setTimeout(()=>{window.location.href="{{ url_for('login') }}";}, 440);
+    };
+    // Mostrar/ocultar contraseña
+    const togglePassword = document.getElementById("togglePassword");
+    const togglePassword2 = document.getElementById("togglePassword2");
+    const passwordInput = document.getElementById("contraseña");
+    const passwordInput2 = document.getElementById("contraseña2");
+    togglePassword?.addEventListener("click", () => {
+      const type = passwordInput.type === "password" ? "text" : "password";
+      passwordInput.type = type;
+      togglePassword.classList.toggle("fa-eye");
+      togglePassword.classList.toggle("fa-eye-slash");
+    });
+    togglePassword2?.addEventListener("click", () => {
+      const type = passwordInput2.type === "password" ? "text" : "password";
+      passwordInput2.type = type;
+      togglePassword2.classList.toggle("fa-eye");
+      togglePassword2.classList.toggle("fa-eye-slash");
+    });
+
+    // Mostrar requisitos de contraseña (toggle)
+    const showReqs = document.getElementById("showReqs");
+    const reqsList = document.getElementById("reqsList");
+    let reqsVisible = false;
+    showReqs.onclick = function() {
+      reqsVisible = !reqsVisible;
+      if(reqsVisible){
+        reqsList.classList.add("active");
+        showReqs.innerText = "Ocultar requisitos de inicio de sesión";
+      } else {
+        reqsList.classList.remove("active");
+        showReqs.innerText = "Ver requisitos de inicio de sesión";
+      }
+    }
+
+    // Validación de contraseñas iguales en frontend
+    document.getElementById("registerForm").onsubmit = function(e) {
+      if(passwordInput.value !== passwordInput2.value) {
+        document.getElementById("passError").innerText = "Las contraseñas no coinciden";
+        document.getElementById("passError").style.display = "block";
+        passwordInput2.focus();
+        e.preventDefault();
+        return false;
+      }
+      document.getElementById("passError").style.display = "none";
+      return true;
+    };
+
+    // Sugerencias de usuario (dinámico y desde backend si existen)
+    const usuarioInput = document.getElementById("usuario");
+    const sugerenciasDiv = document.getElementById("sugerencias-usuario");
+    usuarioInput.addEventListener("blur", function() {
+      const user = usuarioInput.value.trim();
+      if(!user) return;
+      fetch(`/sugerir_usuario?usuario=${encodeURIComponent(user)}`)
+        .then(r => r.json())
+        .then(sugerencias => {
+          if(sugerencias.length > 0 && sugerencias[0] !== user) {
+            sugerenciasDiv.innerHTML =
+              `<div style="color:#ffb300;margin-bottom:5px;">Usuario no disponible. Elige uno:</div>` +
+              sugerencias.map(s => `<span class="sugerencia-opcion">${s}</span>`).join('');
+            sugerenciasDiv.style.display = "block";
+            document.querySelectorAll(".sugerencia-opcion").forEach(span => {
+              span.onclick = () => {
+                usuarioInput.value = span.innerText;
+                sugerenciasDiv.style.display = "none";
+              };
+            });
+          } else {
+            sugerenciasDiv.style.display = "none";
+          }
+        });
+    });
+    usuarioInput.addEventListener("input", () => {
+      sugerenciasDiv.style.display = "none";
+    });
+    // Si el backend ya sugirió usuario, mostrarlo
+    {% if sugerencias and usuario_intentado %}
+    window.onload = function() {
+      document.getElementById("usuario").value = document.getElementById("usuario_intentado").value;
+      document.querySelectorAll(".sugerencia-opcion").forEach(span => {
+        span.onclick = () => {
+          usuarioInput.value = span.innerText;
+          document.querySelector(".alert-warning").style.display = "none";
+        };
+      });
+    }
+    {% endif %}
+  </script>
+</body>
+</html>

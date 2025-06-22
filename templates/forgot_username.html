@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Recuperar usuario | Alia</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <style>
+    body.dark-theme { background:linear-gradient(120deg,#211d2b 0%,#2a213d 100%); font-family:'Poppins','Segoe UI',Arial,sans-serif; color:#f5f5f7; min-height:100dvh; margin:0; padding:0; display:flex; align-items:center; justify-content:center;}
+    .auth-box { background:#241d3b; border-radius:22px; box-shadow:0 8px 36px #2d244b61; padding:34px 20px 22px 20px; width:100%; max-width:355px; display:flex; flex-direction:column; gap:16px; align-items:center; margin:0 18px;}
+    h2 { color:#b388ff; font-weight:600; margin:8px 0 16px 0; text-align:center;}
+    .input-group { width:100%; margin-bottom:10px;}
+    input[type="email"] { width:100%; padding:13px 14px; border-radius:12px; background:#232040; border:1.5px solid #332772; color:#f5f5f7; font-size:1.04rem; outline:none; margin-bottom:2px; }
+    input:focus { border-color:#b388ff; background:#261f3f;}
+    .btn-primary { width:100%; padding:13px 0; background:linear-gradient(90deg,#7c4dff 35%,#b388ff 100%); color:#fff; border:none; border-radius:12px; font-weight:600; font-size:1.1rem; cursor:pointer;}
+    .form-error { color:#ff5370; background:#2d1f3a; border-radius:8px; padding:9px 11px; margin-top:7px; font-size:1.01rem; text-align:center;}
+    .form-success { color:#15c37a; background:#d8f7e6; border-radius:8px; padding:9px 11px; margin-top:7px; font-size:1.01rem; text-align:center;}
+    .form-foot { color:#bdbdf1c8; font-size:0.99rem; text-align:center; margin-top:22px;}
+  </style>
+</head>
+<body class="dark-theme">
+  <div class="auth-box">
+    <h2>Recuperar usuario</h2>
+    <form method="POST">
+      <div class="input-group">
+        <input type="email" name="email" placeholder="Correo electrónico" required autocomplete="email">
+      </div>
+      <button type="submit" class="btn-primary">Enviar usuario</button>
+      {% if error %}<div class="form-error">{{ error }}</div>{% endif %}
+      {% if mensaje %}<div class="form-success">{{ mensaje }}</div>{% endif %}
+    </form>
+    <div class="form-foot"><a href="{{ url_for('login') }}">Volver a iniciar sesión</a></div>
+  </div>
+</body>
+</html>
